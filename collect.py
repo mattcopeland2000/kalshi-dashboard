@@ -24,7 +24,9 @@ def fetch_total_volume():
     cursor = None
     base_url = "https://external-api.kalshi.com/trade-api/v2/markets"
 
+    page = 1
     while True:
+        print(f"Fetching page {page}...")
         params = {"limit": 200, "status": "open"}
         if cursor:
             params["cursor"] = cursor
@@ -34,14 +36,19 @@ def fetch_total_volume():
         data = response.json()
 
         markets = data.get("markets", [])
+        print(f"Page {page} returned {len(markets)} markets")
         for market in markets:
             total_volume += market.get("volume", 0)
             market_count += 1
 
         cursor = data.get("cursor")
         if not cursor:
+            print("No more pages, done fetching.")
             break
+
+        print(f"Waiting 3 seconds before next page...")
         time.sleep(3)
+        page += 1
 
     return total_volume, market_count
 
