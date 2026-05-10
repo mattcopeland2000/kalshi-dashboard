@@ -95,7 +95,7 @@ def main():
 
     # Fetch historical data going back 90 days if not already stored
     from datetime import timedelta
-    start_date = today - timedelta(days=90)
+    start_date = today - timedelta(days=3)
     current = start_date
 
     while current <= today:
