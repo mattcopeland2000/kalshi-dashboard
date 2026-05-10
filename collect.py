@@ -1,6 +1,7 @@
 import os
 import requests
 import psycopg2
+import time
 from datetime import date
 
 DATABASE_URL = os.environ.get("DATABASE_URL")
@@ -40,6 +41,7 @@ def fetch_total_volume():
         cursor = data.get("cursor")
         if not cursor:
             break
+        time.sleep(1)
 
     return total_volume, market_count
 
