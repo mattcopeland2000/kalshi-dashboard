@@ -41,7 +41,7 @@ def fetch_total_volume():
         cursor = data.get("cursor")
         if not cursor:
             break
-        time.sleep(1)
+        time.sleep(2)
 
     return total_volume, market_count
 
